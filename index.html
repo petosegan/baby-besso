@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <body>
+    {% for leme in dialemes %}
+      {{ leme.question }}
+      <blockquote>{{ leme.response }}</blockquote>
+    {% endfor %}
+    <hr>
+    
+    <form action="/convo" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Talk to Besso"></div>
+    </form>
+  </body>
+</html>
+
+{% endautoescape %}

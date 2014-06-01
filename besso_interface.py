@@ -1,17 +1,15 @@
 import cgi, urllib
+import os
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import webapp2
 import besso_online
+import jinja2
 
-MAIN_PAGE_HTML = """\
-    <form action="/convo" method="post">
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-      <div><input type="submit" value="Talk to Besso"></div>
-    </form>
-  </body>
-</html>
-"""
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
 
 DEFAULT_CONVO_NAME = 'default_convo'
 
@@ -36,14 +34,13 @@ class MainPage(webapp2.RequestHandler):
         dialemes = dialeme_query.fetch(8)
         dialemes.reverse()
         
-        for leme in dialemes:
-            self.response.write(cgi.escape(leme.question))
-            self.response.write('<blockquote>%s</blockquote>' %
-                                cgi.escape(leme.response))
-                                
-        self.response.write('<hr>')
-        self.response.write(MAIN_PAGE_HTML)
+        template_values = {
+            'dialemes': dialemes,
+        }
 
+        template = JINJA_ENVIRONMENT.get_template('index.html')
+        self.response.write(template.render(template_values))
+        
 
 class convo_handler(webapp2.RequestHandler):
     def post(self):
