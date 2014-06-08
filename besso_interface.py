@@ -25,15 +25,17 @@ class Dialeme(ndb.Model):
     question = ndb.StringProperty(indexed=False)
     response = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
+    session_id = ndb.StringProperty(indexed=False)
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
     
         session = get_current_session()
-        if session.sid is None:
+        if session.get('session_id') is None:
             random.seed()
             lst = [random.choice(string.ascii_letters + string.digits) for n in xrange(30)]
-            session.sid = "".join(lst)
+            this_sid = "".join(lst)
+            session.set_quick('session_id', this_sid)
             session.save()
         this_convo_name = session.sid
 
@@ -70,6 +72,7 @@ class convo_handler(webapp2.RequestHandler):
         dialeme = Dialeme(parent=convo_key(convo_name))
         dialeme.question = last_prompt
         dialeme.response = this_response
+        dialeme.session_id = convo_name
         dialeme.put()
         
         query_params = {'convo_name': convo_name}
