@@ -1,10 +1,13 @@
 import cgi, urllib
 import os
+import random, string
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import webapp2
 import besso_online
 import jinja2
+from gaesessions import get_current_session
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -25,9 +28,17 @@ class Dialeme(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        self.response.write('<html><body>')
+    
+        session = get_current_session()
+        if session.sid is None:
+            random.seed()
+            lst = [random.choice(string.ascii_letters + string.digits) for n in xrange(30)]
+            session.sid = "".join(lst)
+            session.save()
+        this_convo_name = session.sid
+
         convo_name = self.request.get('convo_name',
-                                          DEFAULT_CONVO_NAME)
+                                          this_convo_name)
                                           
         dialeme_query = Dialeme.query(
             ancestor=convo_key(convo_name)).order(-Dialeme.date)
@@ -36,6 +47,8 @@ class MainPage(webapp2.RequestHandler):
         
         template_values = {
             'dialemes': dialemes,
+            'sessionid': session.sid.encode('ascii','ignore'),
+            'convo_name': convo_name,
         }
 
         template = JINJA_ENVIRONMENT.get_template('index.html')
@@ -44,11 +57,15 @@ class MainPage(webapp2.RequestHandler):
 
 class convo_handler(webapp2.RequestHandler):
     def post(self):
+    
+        session = get_current_session()
+        this_convo_name = session.sid
+        
         last_prompt = cgi.escape(self.request.get('content'))
         this_response = besso_online.online(last_prompt)
         
         convo_name = self.request.get('convo_name',
-                                          DEFAULT_CONVO_NAME)
+                                          this_convo_name)
                                           
         dialeme = Dialeme(parent=convo_key(convo_name))
         dialeme.question = last_prompt
@@ -60,5 +77,5 @@ class convo_handler(webapp2.RequestHandler):
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/convo', convo_handler),
+    ('/convo/', convo_handler),
 ], debug=True)
