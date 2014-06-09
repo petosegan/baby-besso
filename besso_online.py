@@ -50,11 +50,21 @@ rules = collections.OrderedDict([
         r"Is there any alternative to that?",
         r"So how are you going to {0}?",
         r"Why do you need to {0}?",
+        r"Does anyone else know how to {0}?",
+        r"Can anyone help you to {0}?",
         ]),   
     (re.compile(r"I need (.*)", flags=re.I), [
         r"Is there any alternative to that?",
         r"So how can you get {0}?",
         r"Why do you need {0}?",
+        r"Can anyone help you get {0}?",
+        r"Do you know anyone who has {0}?",
+        ]),
+    (re.compile(r"I can't (.*)", flags=re.I), [
+        r"Why can't you {0}?",
+        r"Why do you want to {0}?",
+        r"What is the simplest possible way you can {0}?",
+        r"Can anyone else {0}?",
         ]),
     (re.compile(r"(.*) if", flags=re.I), [
         r"Do you really think it's likely that {0}?",
@@ -113,11 +123,6 @@ rules = collections.OrderedDict([
     (re.compile(r"how can I (.*)", flags=re.I), [
         r"What is the simplest way you can {0}?",
         r"What if you google how to {0}?",
-        ]),
-    (re.compile(r"I can't (.*)", flags=re.I), [
-        r"Why can't you {0}?",
-        r"Why do you want to {0}?",
-        r"What is the simplest possible way you can {0}?",
         ]),
     (re.compile(r" why don't you | fuck | bullshit ", flags=re.I), [
         r"Let's stay focused on your problem",
