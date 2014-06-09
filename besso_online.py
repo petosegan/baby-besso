@@ -13,52 +13,52 @@ rules = collections.OrderedDict([
         r"How do you do. Please state your problem."
         ]),
     (re.compile(r"not sure (.*)"),[
-        r"What is your best guess about \1?"
+        r"What is your best guess about {0}?"
         ]),
     (re.compile(r"sorry", flags=re.I), [
         r"Please don't apologize",
         r"Apologies are not necessary",
         ]),
     (re.compile(r"I remember (.*)", flags=re.I), [
-        r"Do you often think of \1?",
-        r"Does thinking of \1 bring anything else to mind?",
+        r"Do you often think of {0}?",
+        r"Does thinking of {0} bring anything else to mind?",
         r"What else do you remember?",
-        r"Why do you recall \1 right now?",
-        r"What in the present situation reminds you of \1?",
-        r"What is the connection between this situation and \1?",
+        r"Why do you recall {0} right now?",
+        r"What in the present situation reminds you of {0}?",
+        r"What is the connection between this situation and {0}?",
         ]),
     (re.compile(r"I think (.*)", flags=re.I), [
-        r"Why do you think \1?",
+        r"Why do you think {0}?",
         r"That seems reasonable.",
-        r"Are you sure \1?",
+        r"Are you sure {0}?",
         ]),
     (re.compile(r"do you remember (.*)", flags=re.I), [
-        r"What about \1?",
-        r"You mentioned \1",
+        r"What about {0}?",
+        r"You mentioned {0}",
         ]),
     (re.compile(r"I want (.*)", flags=re.I), [
-        r"What would you do next if you got \1?",
-        r"Why do you want \1?",
-        r"Suppose you got \1 soon. What then?"
+        r"What would you do next if you got {0}?",
+        r"Why do you want {0}?",
+        r"Suppose you got {0} soon. What then?"
         ]),
     (re.compile(r"I need to (.*)", flags=re.I), [
         r"Is there any alternative to that?",
-        r"So how are you going to \1?",
-        r"Why do you need to \1?",
+        r"So how are you going to {0}?",
+        r"Why do you need to {0}?",
         ]),   
     (re.compile(r"I need (.*)", flags=re.I), [
         r"Is there any alternative to that?",
-        r"So how can you get \1?",
-        r"Why do you need \1?",
+        r"So how can you get {0}?",
+        r"Why do you need {0}?",
         ]),
     (re.compile(r"(.*) if", flags=re.I), [
-        r"Do you really think it's likely that \1?",
+        r"Do you really think it's likely that {0}?",
         ]),
     (re.compile(r"(.*) are like (.*)", flags=re.I), [
-        r"What resemblance do you see between \1 and \2?",
+        r"What resemblance do you see between {0} and {1}?",
         ]),
     (re.compile(r"(.*) is like (.*)", flags=re.I), [
-        r"In what way is it that \1 is like \2?",
+        r"In what way is it that {0} is like {1}?",
         r"What resemblance do you see?",
         r"Could there really be some connection?",
         r"How?",
@@ -75,30 +75,30 @@ rules = collections.OrderedDict([
         ]),
     (re.compile(r"I was (.*)", flags=re.I), [
         r"Were you really?",
-        r"Perhaps I already knew you were \1.",
-        r"Why do you tell me you were \1 now?"
+        r"Perhaps I already knew you were {0}.",
+        r"Why do you tell me you were {0} now?"
         ]),
     (re.compile(r"was I (.*)", flags=re.I), [
-        r"What if you were \1?",
-        r"Do you think you were \1?",
-        r"What would it mean if you were \1?",
+        r"What if you were {0}?",
+        r"Do you think you were {0}?",
+        r"What would it mean if you were {0}?",
         ]),
     (re.compile(r"I am (.*)", flags=re.I), [
-        r"In what way are you \1?",
-        r"Do you want to be \1?",
+        r"In what way are you {0}?",
+        r"Do you want to be {0}?",
         ]),
     (re.compile(r"am I (.*)", flags=re.I), [
-        r"Do you believe you are \1?",
-        r"Would you want to be \1?",
-        r"You wish I would tell you you are \1?",
-        r"What would it mean if you were \1?",
+        r"Do you believe you are {0}?",
+        r"Would you want to be {0}?",
+        r"You wish I would tell you you are {0}?",
+        r"What would it mean if you were {0}?",
         ]),
     (re.compile(r"are you (.*)", flags=re.I), [
-        r"Why are you interested in whether I am \1 or not?",
-        r"Would you prefer if I weren't \1?",
+        r"Why are you interested in whether I am {0} or not?",
+        r"Would you prefer if I weren't {0}?",
         ]),
     (re.compile(r"you are (.*)", flags=re.I), [
-        r"What makes you think I am \1?",
+        r"What makes you think I am {0}?",
         ]),
     (re.compile(r" because ", flags=re.I), [
         r"That sounds reasonable",
@@ -106,18 +106,18 @@ rules = collections.OrderedDict([
         r"Does that reason seem to explain anything else?",
         ]),
     (re.compile(r"were you (.*)", flags=re.I), [
-        r"Perhaps I was \1?",
+        r"Perhaps I was {0}?",
         r"What do you think?",
-        r"What if I had been \1?",
+        r"What if I had been {0}?",
         ]),
     (re.compile(r"how can I (.*)", flags=re.I), [
-        r"What is the simplest way you can \1?",
-        r"What if you google how to \1?",
+        r"What is the simplest way you can {0}?",
+        r"What if you google how to {0}?",
         ]),
     (re.compile(r"I can't (.*)", flags=re.I), [
-        r"Maybe you could \1 now",
-        r"What if you could \1?",
-        r"What is the simplest possible way you can \1?",
+        r"Maybe you could {0} now",
+        r"What if you could {0}?",
+        r"What is the simplest possible way you can {0}?",
         ]),
     (re.compile(r" why don't you ", flags=re.I), [
         r"Let's stay focused on your problem",
@@ -152,8 +152,8 @@ rules = collections.OrderedDict([
         r"You do not seem quite certain",
         ]),
     (re.compile(r"(.*) are (.*)", flags=re.I), [
-        r"Why are \1 \2?",
-        r"Are you sure they are \2",
+        r"Why are {0} {1}?",
+        r"Are you sure they are {1}",
         ])
     ])
 

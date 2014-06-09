@@ -9,7 +9,6 @@ import string
 import datetime
 import re
 
-## Talking to the computer
 def interact(input, rules, default_responses):
     """Have a conversation with a user."""
     # Read a line, process it, and return the results.
@@ -17,18 +16,18 @@ def interact(input, rules, default_responses):
     # Remove the punctuation from the input and convert to upper-case
     # to simplify matching.
     input = remove_punct(input.upper())
-    response = respond(rules, input, default_responses).upper()
+    response = respond(rules, input, default_responses)
 
     return response
     
-# redo this with regexes
 def respond(rules, input, default_responses):
     for rule in rules:
         m = rule.search(input)
         if m is None:
             continue
-        response = m.expand(random.choice(rules[rule]))
-        return switch_viewpoint(response)
+        mgroups = [switch_viewpoint(mg) for mg in m.groups()] # extract and transform free segments
+        response = random.choice(rules[rule]).format(*mgroups) # choose and populate response template
+        return response.upper()
     return random.choice(default_responses)
 
 ## Translating user input
