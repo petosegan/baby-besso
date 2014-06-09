@@ -64,7 +64,7 @@ class convo_handler(webapp2.RequestHandler):
         this_convo_name = session.sid
         
         last_prompt = cgi.escape(self.request.get('content'))
-        this_response = besso_online.online(last_prompt)
+        this_response = besso_online.main(last_prompt)
         
         convo_name = self.request.get('convo_name',
                                           this_convo_name)
