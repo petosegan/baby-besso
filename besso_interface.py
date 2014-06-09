@@ -44,7 +44,7 @@ class MainPage(webapp2.RequestHandler):
                                           
         dialeme_query = Dialeme.query(
             ancestor=convo_key(convo_name)).order(-Dialeme.date)
-        dialemes = dialeme_query.fetch(8)
+        dialemes = dialeme_query.fetch()
         dialemes.reverse()
         
         template_values = {

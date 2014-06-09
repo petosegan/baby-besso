@@ -2,3 +2,25 @@ body {
   font-family: Verdana, Helvetica, sans-serif;
   background-color: #DDDDDD;
 }
+
+#conversation {
+    position:fixed;
+    height:80%;
+    width:80%;
+    overflow:auto;
+    background-color:#ffffff;
+    font-family:Courier;
+    border:1px solid black;
+    padding:1px;
+}
+
+#footer {
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    height:15%;
+}
+
+span {
+    color:blue;
+}

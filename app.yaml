@@ -11,6 +11,9 @@ handlers:
 - url: /.*
   script: besso_interface.application
   
+- url: /js
+  static_dir: js
+  
 libraries:
 - name: webapp2
   version: latest

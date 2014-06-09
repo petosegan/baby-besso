@@ -3,18 +3,28 @@
 <html>
 <head>
   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    <script type="text/javascript">
+        function scroll(){
+            var objDiv = document.getElementById("conversation")
+            objDiv.scrollTop = objDiv.scrollHeight;
+        }
+    </script>
+  
 </head>
-  <body>
-    {% for leme in dialemes %}
-      {{ leme.question }}
-      <blockquote>{{ leme.response }}</blockquote>
-    {% endfor %}
-    <hr>
-    
-    <form action="/convo/?convo_name={{convo_name}}" method="post">
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-      <div><input type="submit" value="Talk to Besso"></div>
-    </form>
+  <body onload='scroll()'>
+    <div id="conversation">
+        {% for leme in dialemes %}
+          {{ leme.question }}
+          <blockquote><span>{{ leme.response }}</span></blockquote>
+        {% endfor %}
+        <a name=endofconvo></a>
+    </div>
+    <div id="footer">
+        <form action="/convo/?convo_name={{convo_name}}" method="post">
+          <div><input type="text" name="content" size=100% id="textinput" autocomplete="off" autofocus></input></div>
+          <div><input type="submit" value="Talk to Besso"></div>
+        </form>
+    </div>
   </body>
 </html>
 
