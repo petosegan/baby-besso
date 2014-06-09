@@ -32,6 +32,7 @@ class MainPage(webapp2.RequestHandler):
     
         session = get_current_session()
         if session.get('session_id') is None:
+            # generate random session id
             random.seed()
             lst = [random.choice(string.ascii_letters + string.digits) for n in xrange(30)]
             this_sid = "".join(lst)
@@ -39,11 +40,10 @@ class MainPage(webapp2.RequestHandler):
             session.save()
         this_convo_name = session.sid
 
-        convo_name = self.request.get('convo_name',
-                                          this_convo_name)
+        convo_name = self.request.get('convo_name', this_convo_name)
                                           
-        dialeme_query = Dialeme.query(
-            ancestor=convo_key(convo_name)).order(-Dialeme.date)
+        dialeme_query = Dialeme.query(ancestor=convo_key(convo_name)).order(-Dialeme.date)
+        # query to get all lemes in convo, displayed in reverse chronological order
         dialemes = dialeme_query.fetch()
         dialemes.reverse()
         
