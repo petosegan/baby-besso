@@ -35,32 +35,32 @@ rules = collections.OrderedDict([
         r"What in the present situation reminds you of {0}?",
         r"What is the connection between this situation and {0}?",
         ]),
-    (re.compile(r"I think (.*)", flags=re.I), [
+    (re.compile(r"(I|we) think (.*)", flags=re.I), [
         r"Why do you think {0}?",
         r"That seems reasonable.",
         r"Are you sure {0}?",
         ]),
-    (re.compile(r"I want (.*)", flags=re.I), [
+    (re.compile(r"(I|we) want (.*)", flags=re.I), [
         r"What would you do next if you got {0}?",
         r"Why do you want {0}?",
         r"Suppose you got {0} soon. What then?",
         r"How can you get {0}?"
         ]),
-    (re.compile(r"I need to (.*)", flags=re.I), [
+    (re.compile(r"(I|we) need to (.*)", flags=re.I), [
         r"Is there any alternative to that?",
         r"So how are you going to {0}?",
         r"Why do you need to {0}?",
         r"Does anyone else know how to {0}?",
         r"Can anyone help you to {0}?",
         ]),   
-    (re.compile(r"I need (.*)", flags=re.I), [
+    (re.compile(r"(I|we) need (.*)", flags=re.I), [
         r"Is there any alternative to that?",
         r"So how can you get {0}?",
         r"Why do you need {0}?",
         r"Can anyone help you get {0}?",
         r"Do you know anyone who has {0}?",
         ]),
-    (re.compile(r"I can't (.*)", flags=re.I), [
+    (re.compile(r"(I|we) can't (.*)", flags=re.I), [
         r"Why can't you {0}?",
         r"Why do you want to {0}?",
         r"What is the simplest possible way you can {0}?",
@@ -88,9 +88,8 @@ rules = collections.OrderedDict([
     (re.compile(r" no ", flags=re.I), [
         r"Why not?",
         ]),
-    (re.compile(r"I was (.*)", flags=re.I), [
+    (re.compile(r"(I was|we were) (.*)", flags=re.I), [
         r"Were you really?",
-        r"Perhaps I already knew you were {0}.",
         r"Why do you tell me you were {0} now?"
         ]),
     (re.compile(r"was I (.*)", flags=re.I), [
@@ -120,7 +119,7 @@ rules = collections.OrderedDict([
         r"What do you think?",
         r"What if I had been {0}?",
         ]),
-    (re.compile(r"how can I (.*)", flags=re.I), [
+    (re.compile(r"how can (I|we) (.*)", flags=re.I), [
         r"What is the simplest way you can {0}?",
         r"What if you google how to {0}?",
         ]),
@@ -159,7 +158,6 @@ rules = collections.OrderedDict([
 
 default_responses = [
     "Very interesting",
-    "I am not sure I understand you fully",
     "Please continue",
     "Go on",
     "Uh huh",
