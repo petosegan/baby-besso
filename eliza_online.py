@@ -8,6 +8,7 @@ import random
 import string
 import datetime
 import re
+from nltk import word_tokenize, pos_tag
 
 def interact(input, rules, default_responses):
     """Have a conversation with a user."""
@@ -27,7 +28,7 @@ def respond(rules, input, default_responses):
             continue
         mgroups = [switch_viewpoint(mg) for mg in m.groups()] # extract and transform free segments
         response = random.choice(rules[rule]).format(*mgroups) # choose and populate response template
-        return response.upper()
+        return parse_subobj(response.upper())
     return random.choice(default_responses)
 
 ## Translating user input
@@ -65,3 +66,15 @@ def remove_punct(string):
             .replace('.', '')
             .replace(';', '')
             .replace('!', ''))
+            
+def parse_subobj(input):
+    """Correct uses of 'I' that should be 'ME'"""
+    text = nltk.word_tokenize(input)
+    tagset = nltk.pos_tag(text)
+    output_words = [tagset[0][0]]
+    for i in range(1, len(tagset)):
+        if tagset[i][0] == "I" and tagset[i-1][1] == "V":
+            output_words.append("ME")
+        else:
+            output_words.append(tagset[i][0])
+    return ' '.join(output_words)
