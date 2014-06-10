@@ -153,7 +153,13 @@ rules = collections.OrderedDict([
     (re.compile(r"(.*) are (.*)", flags=re.I), [
         r"Why are {0} {1}?",
         r"Are you sure they are {1}",
-        ])
+        ]),
+    (re.compile(r"(.*)\?", flags=re.I), [
+        r"I don't know. Please continue.",
+        r"I'm not sure. What do you think?",
+        r"Hmmm...",
+        r"I'm not quite sure...",
+        r"Hmm, hard to say."
     ])
 
 default_responses = [
