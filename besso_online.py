@@ -66,6 +66,16 @@ rules = collections.OrderedDict([
         r"What is the simplest possible way you can {1}?",
         r"Can anyone else {1}?",
         ]),
+    (re.compile(r"(I|we) should (.*)", flags=re.I), [
+        r"Probably you should {1}.",
+        r"I guess you should {1}.",
+        r"Why haven't you already {1}?",
+        ]),
+    (re.compile(r"(I|we) guess (.*)", flags=re.I), [
+        r"Sounds reasonable.",
+        r"Yeah, ok.",
+        r"How can you make sure that {1}?",
+        ]),
     (re.compile(r"(.*) if", flags=re.I), [
         r"Do you really think it's likely that {0}?",
         ]),
