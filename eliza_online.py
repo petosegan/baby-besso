@@ -59,8 +59,7 @@ def switch_viewpoint(input):
 
 def remove_punct(string):
     """Remove common punctuation marks."""
-    if string.endswith('?'):
-        string = string[:-1]
+
     return (string.replace(',', '')
             .replace('.', '')
             .replace(';', '')
