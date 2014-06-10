@@ -159,7 +159,7 @@ rules = collections.OrderedDict([
         r"I'm not sure. What do you think?",
         r"Hmmm...",
         r"I'm not quite sure...",
-        r"Hmm, hard to say."
+        r"Hmm, hard to say."])
     ])
 
 default_responses = [
