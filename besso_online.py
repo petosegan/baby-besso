@@ -157,7 +157,6 @@ rules = collections.OrderedDict([
     ])
 
 default_responses = [
-    "Very interesting",
     "Please continue",
     "Go on",
     "Uh huh",
@@ -166,6 +165,8 @@ default_responses = [
     "Are you sure?",
     "Right...",
     "Yeah, ok",
+    "Sure, ok",
+    "Alright...",
     ]
 
 def main(input):
