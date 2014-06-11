@@ -6,24 +6,24 @@ import collections
 import re
 
 rules = collections.OrderedDict([
-    (re.compile(r"thanks", flags=re.I), [
+    (re.compile(r"\bthanks\b", flags=re.I), [
         r"You're welcome! Now get to work.",
         ]),
-    (re.compile(r"hello|hi", flags=re.I), [
+    (re.compile(r"\b(hello|hi)\b", flags=re.I), [
         r"How do you do. Please state your problem."
         ]),
-    (re.compile(r"not sure (.*)"),[
+    (re.compile(r"\bnot sure (.*)"),[
         r"What is your best guess about {0}?"
         ]),
-    (re.compile(r"sorry", flags=re.I), [
+    (re.compile(r"\bsorry\b", flags=re.I), [
         r"Please don't apologize",
         r"Apologies are not necessary",
         ]),
-    (re.compile(r" perhaps ", flags=re.I), [
+    (re.compile(r"\bperhaps\b", flags=re.I), [
         r"You do not seem quite certain",
         r"How can you be sure?",
         ]),
-    (re.compile(r" because ", flags=re.I), [
+    (re.compile(r"\bbecause\b", flags=re.I), [
         r"That sounds reasonable",
         r"What other reasons might there be?",
         r"Does that reason seem to explain anything else?",
@@ -76,8 +76,11 @@ rules = collections.OrderedDict([
         r"Yeah, ok.",
         r"How can you make sure that {1}?",
         ]),
-    (re.compile(r"(.*) if", flags=re.I), [
-        r"Do you really think it's likely that {0}?",
+    (re.compile(r"\b(I|we) don't know (.*)", flags=re.I), [
+        r"How can you determine {1}?",
+        r"Does anyone else know {1}?",
+        r"Why do you need to know {1}?",
+        r"What is your best guess about {1}?",
         ]),
     (re.compile(r"(.*) are like (.*)", flags=re.I), [
         r"What resemblance do you see between {0} and {1}?",
@@ -88,14 +91,14 @@ rules = collections.OrderedDict([
         r"Could there really be some connection?",
         r"How?",
         ]),
-    (re.compile(r" alike ", flags=re.I), [
+    (re.compile(r"\balike\b", flags=re.I), [
         r"In what way?",
         r"What similarities are there?",
         ]),
-    (re.compile(r" same ", flags=re.I), [
+    (re.compile(r"\bsame\b", flags=re.I), [
         r"What other connections do you see?",
         ]),
-    (re.compile(r" no ", flags=re.I), [
+    (re.compile(r"\bno\b", flags=re.I), [
         r"Why not?",
         ]),
     (re.compile(r"(I was|we were) (.*)", flags=re.I), [
@@ -136,33 +139,29 @@ rules = collections.OrderedDict([
     (re.compile(r" why don't you | fuck | bullshit ", flags=re.I), [
         r"Let's stay focused on your problem",
         ]),
-    (re.compile(r" yes ", flags=re.I), [
+    (re.compile(r"\byes\b", flags=re.I), [
         r"You seem quite positive",
         r"You are sure?",
         r"I understand",
         ]),
-    (re.compile(r" someone ", flags=re.I), [
+    (re.compile(r"\bsomeone\b", flags=re.I), [
         r"Can you be more specific?",
         ]),
-    (re.compile(r" everyone ", flags=re.I), [
+    (re.compile(r"\beveryone\b", flags=re.I), [
         r"Surely not everyone",
         r"Can you think of anyone in particular?",
         r"Who, for example?",
         ]),
-    (re.compile(r" always ", flags=re.I), [
+    (re.compile(r"\balways\b", flags=re.I), [
         r"Can you think of a specific example?",
         r"When?",
         r"What incident are you thinking of?",
         r"Really--always?",
         ]),
-    (re.compile(r" what ", flags=re.I), [
+    (re.compile(r"\bwhat\b", flags=re.I), [
         r"Why are you doing it this way?",
         r"What is it you really want to do?",
         r"What do you think should be your very next step?",
-        ]),
-    (re.compile(r"(.*) are (.*)", flags=re.I), [
-        r"Why are {0} {1}?",
-        r"Are you sure they are {1}",
         ]),
     (re.compile(r"(.*)\?", flags=re.I), [
         r"I don't know. Please continue.",
