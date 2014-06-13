@@ -103,37 +103,6 @@ rules = collections.OrderedDict([
     (re.compile(r"\bno\b", flags=re.I), [
         r"Why not?",
         ]),
-    (re.compile(r"(I was|we were) (.*)", flags=re.I), [
-        r"Were you really?",
-        r"Why do you tell me you were {1} now?"
-        ]),
-    (re.compile(r"was I (.*)", flags=re.I), [
-        r"What if you were {0}?",
-        r"Do you think you were {0}?",
-        r"What would it mean if you were {0}?",
-        ]),
-    (re.compile(r"I am (.*)", flags=re.I), [
-        r"In what way are you {0}?",
-        r"Do you want to be {0}?",
-        ]),
-    (re.compile(r"am I (.*)", flags=re.I), [
-        r"Do you believe you are {0}?",
-        r"Would you want to be {0}?",
-        r"You wish I would tell you you are {0}?",
-        r"What would it mean if you were {0}?",
-        ]),
-    (re.compile(r"are you (.*)", flags=re.I), [
-        r"Why are you interested in whether I am {0} or not?",
-        r"Would you prefer if I weren't {0}?",
-        ]),
-    (re.compile(r"you are (.*)", flags=re.I), [
-        r"What makes you think I am {0}?",
-        ]),
-    (re.compile(r"were you (.*)", flags=re.I), [
-        r"Perhaps I was {0}?",
-        r"What do you think?",
-        r"What if I had been {0}?",
-        ]),
     (re.compile(r"how can (I|we) (.*)", flags=re.I), [
         r"What is the simplest way you can {1}?",
         r"What if you google how to {1}?",

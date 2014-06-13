@@ -14,20 +14,15 @@ logging.basicConfig( filename=r'C:\Users\Desktop\Besso\besso_online\elizalog.log
 
 def interact(input, rules, default_responses):
     """Have a conversation with a user."""
-    # Read a line, process it, and return the results.
-    thistime = datetime.datetime(2000,1,1)
-    # Remove the punctuation from the input and convert to upper-case
-    # to simplify matching.
-    input = remove_punct(input.upper())
-    response = respond(rules, input, default_responses)
-
+    logging.debug(input)
+    transformed_input = strip_adverbs(decontract(remove_punct(input.upper())))
+    logging.debug(transformed_input)
+    response = respond(rules, transformed_input, default_responses)
     return response
     
 def respond(rules, input, default_responses):
-    stripped_input = strip_adverbs(decontract(input))
-    logging.debug(stripped_input)
     for rule in rules:
-        m = rule.search(stripped_input)
+        m = rule.search(input)
         if m is None:
             continue
         mgroups = [switch_viewpoint(mg) for mg in m.groups()] # extract and transform free segments
@@ -144,14 +139,14 @@ def decontract(input):
     
 def remove_punct(string):
     """Remove common punctuation marks."""
-
     return (string.replace(',', '')
             .replace('.', '')
             .replace(';', '')
             .replace('!', ''))
             
 def parse_subobj(input):
-    """Correct uses of 'I' that should be 'ME'"""
+    """Correct uses of 'I' that should be 'ME'
+    This is a super kludge that doesn't work well."""
     verbtags = ["VB", "VBD", "VBG", "VBN", "VBP", "VBZ"]
     text = word_tokenize(input)
     tagset = pos_tag(text)
