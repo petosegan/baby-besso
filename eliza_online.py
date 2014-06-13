@@ -24,8 +24,10 @@ def interact(input, rules, default_responses):
     return response
     
 def respond(rules, input, default_responses):
+    stripped_input = strip_adverbs(input)
+    logging.debug(stripped_input)
     for rule in rules:
-        m = rule.search(input)
+        m = rule.search(stripped_input)
         if m is None:
             continue
         mgroups = [switch_viewpoint(mg) for mg in m.groups()] # extract and transform free segments
@@ -79,6 +81,19 @@ def parse_subobj(input):
     for i in range(1, len(tagset)):
         if tagset[i][0] == "I" and tagset[i-1][1] in verbtags:
             output_words.append("ME")
+        else:
+            output_words.append(tagset[i][0])
+    return ' '.join(output_words)
+
+def strip_adverbs(input):
+    """Remove all adverbs and interjections before parsing"""
+    adverb_tags = ["RB", "RBR", "RBS", "UH", "WRB"]
+    tagset = pos_tag(word_tokenize(input))
+    logging.debug(tagset)
+    output_words = []
+    for i in range(0, len(tagset)):
+        if tagset[i][1] in adverb_tags:
+            continue
         else:
             output_words.append(tagset[i][0])
     return ' '.join(output_words)
