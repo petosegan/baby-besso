@@ -4,6 +4,8 @@ import eliza_online
 import os
 import collections
 import re
+import logging
+logging.basicConfig( filename=r'C:\Users\Desktop\Besso\besso_online\bessolog.log', filemode='a' )
 
 rules = collections.OrderedDict([
     (re.compile(r"\bthanks\b", flags=re.I), [
@@ -185,7 +187,7 @@ default_responses = [
     ]
 
 def main(input):
-
+    logging.getLogger().setLevel(logging.DEBUG)
     return eliza_online.interact(input, rules, map(str.upper, default_responses))
 
 if __name__ == '__main__':
